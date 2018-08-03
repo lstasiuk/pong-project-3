@@ -2,6 +2,7 @@ import { SVG_NS, KEYS } from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
+import Score from './Score';
 
 export default class Game {
 
@@ -37,6 +38,11 @@ export default class Game {
             KEYS.up,
             KEYS.down,
         );
+
+        this.score1 = new Score(this.width / 2 - 50, 30, 30);
+        this.score2 = new Score(this.width / 2 + 25, 30, 30);
+
+
         this.ball = new Ball(8, this.width, this.height);
         // keydown for pausing game
 
@@ -71,7 +77,11 @@ export default class Game {
         this.board.render(svg);
         this.player1.render(svg);
         this.player2.render(svg);
-        this.ball.render(svg);
+        this.ball.render(svg, this.player1, this.player2);
+
+        this.score1.render(svg, this.player1.score);
+        this.score2.render(svg, this.player2.score);
+
     }
 
 }

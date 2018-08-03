@@ -2,6 +2,7 @@ import { SVG_NS } from '../settings';
 
 
 export default class Paddle {
+
     constructor(boardHeight, width, height, x, y, up, down) {
             this.boardHeight = boardHeight;
             this.width = width;
@@ -33,6 +34,13 @@ export default class Paddle {
     }
 
 
+    coordinates(x, y, width, height) {
+        let leftX = x;
+        let rightX = x + width;
+        let topY = y;
+        let bottomY = y + height;
+        return [leftX, rightX, topY, bottomY];
+    }
 
     render(svg) {
         let rect = document.createElementNS(SVG_NS, 'rect');
