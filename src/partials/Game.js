@@ -38,11 +38,26 @@ export default class Game {
             KEYS.down,
         );
         this.ball = new Ball(8, this.width, this.height);
+        // keydown for pausing game
 
-        // Other code goes here...
+        document.addEventListener("keydown", event => {
+            switch (event.key) {
+                case KEYS.spaceBar:
+                    this.pause = !this.pause;
+                    break;
+            }
+        });
+
+        // Other code goes here...end of constructor
     }
 
     render() {
+
+        if (this.pause) {
+            return;
+        }
+
+
         this.gameElement.innerHTML = '';
 
         let svg = document.createElementNS(SVG_NS, "svg");
