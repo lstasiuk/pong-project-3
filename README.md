@@ -25,3 +25,6 @@ A basic pong game using SVGs.
 **Player 2:**
 * ▲ : up
 * ▼: down
+
+https://lstasiuk.github.io/pong-project-3/
+
