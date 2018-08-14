@@ -70,11 +70,6 @@ export default class Ball {
 
         player.score++;
         this.reset();
-        if (player.score === 10) {}
-
-
-
-
     }
 
     render(svg, player1, player2) {

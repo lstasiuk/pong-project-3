@@ -3,7 +3,6 @@ import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
 import Score from './Score';
-import { setTimeout } from 'timers';
 import Winner from './Winner';
 
 export default class Game {
@@ -67,12 +66,10 @@ export default class Game {
 
     checkWinner(player1, player2, svg) {
         if (player1.score >= 10) {
-            console.log(player1.name);
             this.pause = !this.pause;
             this.winner.render(svg, player1.name + " Wins!");
 
         } else if (player2.score >= 10) {
-            console.log(this.player2.name);
             this.pause = !this.pause;
             this.winner.render(svg, player2.name + " Wins!");
         }
