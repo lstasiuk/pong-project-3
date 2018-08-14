@@ -3,6 +3,8 @@ import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
 import Score from './Score';
+import { setTimeout } from 'timers';
+import Winner from './Winner';
 
 export default class Game {
 
@@ -27,6 +29,8 @@ export default class Game {
             ((this.height - this.paddleHeight) / 2),
             KEYS.a,
             KEYS.z,
+            "player1"
+
         );
 
         this.player2 = new Paddle(
@@ -37,13 +41,16 @@ export default class Game {
             ((this.height - this.paddleHeight) / 2),
             KEYS.up,
             KEYS.down,
+            "player2"
         );
 
         this.score1 = new Score(this.width / 2 - 50, 30, 30);
         this.score2 = new Score(this.width / 2 + 25, 30, 30);
 
+        this.winner = new Winner(this.width / 2 - 50, this.height / 2 + 20, 50);
 
         this.ball = new Ball(8, this.width, this.height);
+        this.ball2 = new Ball(8, this.width, this.height);
         // keydown for pausing game
 
         document.addEventListener("keydown", event => {
@@ -57,11 +64,26 @@ export default class Game {
         // Other code goes here...end of constructor
     }
 
+
+    checkWinner(player1, player2, svg) {
+        if (player1.score >= 10) {
+            console.log(player1.name);
+            this.pause = !this.pause;
+            this.winner.render(svg, player1.name + " Wins!");
+
+        } else if (player2.score >= 10) {
+            console.log(this.player2.name);
+            this.pause = !this.pause;
+            this.winner.render(svg, player2.name + " Wins!");
+        }
+    }
     render() {
 
         if (this.pause) {
             return;
         }
+
+
 
 
         this.gameElement.innerHTML = '';
@@ -77,10 +99,13 @@ export default class Game {
         this.board.render(svg);
         this.player1.render(svg);
         this.player2.render(svg);
-        this.ball.render(svg, this.player1, this.player2);
+        this.ball.render(svg, this.player1, this.player2)
+        this.ball2.render(svg, this.player1, this.player2);
+
 
         this.score1.render(svg, this.player1.score);
         this.score2.render(svg, this.player2.score);
+        this.checkWinner(this.player1, this.player2, svg);
 
     }
 

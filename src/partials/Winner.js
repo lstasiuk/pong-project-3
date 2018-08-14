@@ -8,7 +8,7 @@ export default class Score {
         this.size = size;
     }
 
-    render(svg, score) {
+    render(svg, winner) {
         // try using svg text element, take a look at other render methods e.g. paddle for ideas as well as google for svg text elements
 
         let text = document.createElementNS(SVG_NS, 'text');
@@ -17,11 +17,8 @@ export default class Score {
         text.setAttributeNS(null, 'font-family', 'Silkscreen Web');
         text.setAttributeNS(null, 'fill', 'white');
         text.setAttributeNS(null, 'font-size', 'this.size');
-        text.textContent = score;
+        text.textContent = winner;
         svg.appendChild(text);
 
     }
 }
-
-
-// try creating a new instance in Game.js
